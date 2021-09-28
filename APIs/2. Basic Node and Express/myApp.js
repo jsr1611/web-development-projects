@@ -37,8 +37,7 @@ app.use("/public", express.static(assetsPath));
 
 
 
-//serve json data on a /json route
-
+//serve json data on a "/json" route
 app.get("/json", function(req, res){
     msg = "Hello json";
 
@@ -79,6 +78,11 @@ app.get("/name", function(req, res){
     res.json({name: nameStr});
 });
 
+//Get Data From Post Requests
+app.post("/name", function(req, res){
+    nameStr = req.body.first + " " + req.body.last;
+    res.json({name: nameStr});
+});
 
 
 
