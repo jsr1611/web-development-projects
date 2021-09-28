@@ -49,14 +49,23 @@ app.get("/json", function(req, res){
 });
 
 
+//chaining middleware 
 app.get("/now", function(req, res, next){
     req.time = new Date().toString();
     next();
 },
 function(req, res){
     res.json({"time": req.time});
+    //next();
 });
 
+//Get Route Parameter Input from the Client
+app.get("/:word/echo", function(req, res){
+    //req.params = {"echo": "word"};
+    console.log("req word: " + req.params.word);
+    res.json({"echo": req.params.word});
+    
+});
 
 
 
