@@ -6,6 +6,7 @@ var indexFilePath = __dirname + "/views/index.html";
 var assetsPath = __dirname + "/public";
 
 
+//Root-Level Req logger middleware
 app.use("/", function(req, res, next){
     console.log(req.method + " " + req.path + " - " + "::ffff:" + req.ip);
     next();
@@ -42,14 +43,19 @@ app.get("/json", function(req, res){
         msg = "Hello json";
     }
     console.log("env var: " + process.env.MESSAGE_STYLE);
-
     
     res.json({"message":msg});
     
 });
 
 
-
+app.get("/now", function(req, res, next){
+    req.time = new Date().toString();
+    next();
+},
+function(req, res){
+    res.json({"time": req.time});
+});
 
 
 
