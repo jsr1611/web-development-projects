@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+require('dotenv').config()
 
 var indexFilePath = __dirname + "/views/index.html";
 var assetsPath = __dirname + "/public";
@@ -24,7 +25,16 @@ app.use("/public", express.static(assetsPath));
 //serve json data on a /json route
 
 app.get("/json", function(req, res){
-    res.json({"message":"Hello json"});
+    msg = "Hello json";
+
+    if(process.env.MESSAGE_STYLE == "uppercase"){
+        msg = msg.toUpperCase();
+    }
+    console.log("env var: " + process.env.MESSAGE_STYLE);
+
+    
+    res.json({"message":msg});
+    
 });
 
 
