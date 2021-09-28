@@ -5,6 +5,14 @@ require('dotenv').config()
 var indexFilePath = __dirname + "/views/index.html";
 var assetsPath = __dirname + "/public";
 
+
+app.use("/", function(req, res, next){
+    console.log(req.method + " " + req.path + " - " + "::ffff:" + req.ip);
+    next();
+})
+
+
+
 app.get("/", function(req, res){
     //res.send('Hello Express');
     res.sendFile(indexFilePath);
