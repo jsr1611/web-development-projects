@@ -1,5 +1,7 @@
 {
+	"author":"Jumanazar Saidov",
 	"name": "fcc-learn-node-with-express",
+	"description":"A web project using Node and Express", 
 	"version": "0.1.0",
 	"dependencies": {
 		"express": "^4.14.0",
