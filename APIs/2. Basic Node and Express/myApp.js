@@ -1,17 +1,23 @@
+const bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
-require('dotenv').config()
+require('dotenv').config();
+
 
 var indexFilePath = __dirname + "/views/index.html";
 var assetsPath = __dirname + "/public";
+
+
+//body-parser to parse POST requests
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 //Root-Level Req logger middleware
 app.use("/", function(req, res, next){
     console.log(req.method + " " + req.path + " - " + "::ffff:" + req.ip);
     next();
-})
-
+});
 
 
 app.get("/", function(req, res){
