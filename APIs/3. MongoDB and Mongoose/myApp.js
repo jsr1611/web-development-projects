@@ -109,10 +109,18 @@ const removeManyPeople = (done) => {
   });
 };
 
+
+//Chain search query helpers to narrow search results
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
+  const query = Person.find({favoriteFoods:foodToSearch});
+  query.sort('name');
+  query.limit(2);
+  query.select('name favoriteFoods');
+  query.exec(function(err, data){
+    if(err) return console.error(err);
+    done(null, data);
+  });
 };
 
 /** **Well Done !!**
