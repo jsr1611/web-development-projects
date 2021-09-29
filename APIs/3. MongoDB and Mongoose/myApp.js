@@ -34,12 +34,24 @@ const createManyPeople = function(arrayOfPeople, done) {
   });
 };
 
+
+//Searching database for people with name
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name:personName}, function(err, people){
+    if(err) return console.error(err)
+    done(null, people);
+  }).exec();
+  
 };
 
+
+//Searching database for a person with specific favourite food
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods:food}, function(err, onePerson){
+    if(err) return console.error(err)
+    done(null, onePerson);
+  });
+  
 };
 
 const findPersonById = (personId, done) => {
