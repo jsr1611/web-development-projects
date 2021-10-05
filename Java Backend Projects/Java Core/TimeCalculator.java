@@ -4,6 +4,8 @@ package operators;
 /*
 Displays time in HH:mm:ss for a given time in seconds
  */
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TimeCalculator {
@@ -12,7 +14,16 @@ public class TimeCalculator {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter time in seconds: ");
-        time = scanner.nextInt();
+        boolean inputSuccess = false;
+        while (!inputSuccess) {
+            try {
+                time = Integer.parseInt(scanner.next());
+                inputSuccess = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Please, enter only numbers");
+            }
+        }
+
         if(time >= 60){
             if(time >= 60 * 60){
                 hours = calcHours();
