@@ -1,9 +1,11 @@
 package operators;
-/*
-Calculates speed (in meters per second) using distance in km and time in minutes.
- */
 
 import java.util.Scanner;
+
+/*
+* Author: Jumanazar Saidov
+* Calculates speed (in meters per second) using distance in km and time in minutes.
+*/
 
 public class speedCalculator {
     public static void main(String[] args){

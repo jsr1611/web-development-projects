@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/*
+* Author: Jumanazar Saidov
+* Currency converter
+*/
 public class CurrencyExchange {
     static double rate, inputVolume, outputVolume;
     static int currency = -1; // 0 - USD, 1 - UZS

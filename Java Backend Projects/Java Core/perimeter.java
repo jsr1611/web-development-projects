@@ -1,6 +1,11 @@
 package variables;
 import java.util.Scanner;
 
+/*
+ * Author: Jumanazar Saidov
+ * Perimeter calculator
+ */
+
 class Perimeter {
     public Perimeter() {}
 

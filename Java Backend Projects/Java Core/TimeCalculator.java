@@ -1,12 +1,11 @@
 package operators;
 
-// Author: Jumanazar Saidov
-/*
-Displays time in HH:mm:ss for a given time in seconds
- */
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
+
+/*
+* Author: Jumanazar Saidov
+* Displays time in HH:mm:ss for a given time in seconds
+*/
 
 public class TimeCalculator {
     static int time; // time in seconds
