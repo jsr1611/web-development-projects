@@ -1,0 +1,27 @@
+1-topshiriq
+
+X va Y koordinatalarni ifodalovchi atributlari bor bo’lgan Point classini yozing.
+Koordinatalarni “(45, 56)” shaklda chop etuvchi printXY() methodini yozing.
+
+2-topshiriq
+
+To’g’ri burchakli uchburchak klassini yarating.
+Uning barcha atributlari va methodlariga mos nom va toifa tanlang.
+(Eni va bo’yi attributlari, Perimetrini va Yuzasini hisoblaydigan 2 ta methodi bo’lsin).
+
+3-topshiriq
+
+Ikkita atribut: firstAtribut va secondAttribut larga ega MyClass nomli klass yarating.
+Ushbu atributlar qiymatini aboutAttributes, yig’indisini sumAttributes,
+kattasini maxAttribute ekranga chiqazadigan methodlarini yarating.
+
+4-topshiriq
+
+Quyidagi 3ta attribute bor bo’lgan Date klassini yarating: yil, oy va kun.
+15.05.2020 formatdagi sanani chop etuvchi mehod yarating.
+
+5-topshiriq
+
+Quyidagi atributlari bor bo’lgan Student nomli klass yarating:
+familiya,  ismi,  guruh nomeri, o’qiydigan fanlari (5 ta fandan iborat massiv).
+O’qidigan fanlari ro’yxatini ekranga chiqazuvchi printSubjects nomli method yarating
