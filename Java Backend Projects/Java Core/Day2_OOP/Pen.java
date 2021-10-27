@@ -11,9 +11,9 @@ public class Pen {
     public Pen() {
     }
 
-    public Pen(boolean mode, double inqAmount, double inkSpent) {
+    public Pen(boolean mode, double inkAmount, double inkSpent) {
         this.mode = mode;
-        this.inkAmount = inqAmount;
+        this.inkAmount = inkAmount;
         this.inkSpent = inkSpent;
     }
 

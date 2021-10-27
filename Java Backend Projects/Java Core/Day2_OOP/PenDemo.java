@@ -6,7 +6,7 @@ public class PenDemo {
         Pen pen = new Pen(false, 100, 10);
         pen.pushButton();
         System.out.println(pen.getInkAmount());
-        pen.write("Assalomu aleykum");
+        pen.write("As Salomu aleykum");
         System.out.println(pen.getInkAmount());
 
         pen.refill(-150);
