@@ -1,9 +1,9 @@
 package OOP.Day4.Overloading;
 
+
 public class FigureDemo {
     public static void main(String[] args) {
         Figure figure = new Figure();
-
         figure.print(4,5);
         figure.print(5);
 
