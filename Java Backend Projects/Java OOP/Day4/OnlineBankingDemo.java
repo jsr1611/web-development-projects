@@ -3,7 +3,7 @@ package OOP.Day4;
 import java.util.Scanner;
 
 public class OnlineBankingDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Account account0 = new Account(100_000, "Jamshiddin Siddiqov", "Xalq banki", 100_000, "jams000$$");
         Account account1 = new Account(100_001, "Umar Odilov", "Milliy bank", 500_000, "umar001$$");
         Account account2 = new Account(100_002, "Akbar Kamolov", "Milly bank", 300_000, "akba002$$");
@@ -18,80 +18,90 @@ public class OnlineBankingDemo {
         Scanner scanner = new Scanner(System.in);
          final int QUIT = -1, LOGOUT = 0, VIEW = 1, DEPOSIT = 2, WITHDRAW = 3, TRANSFER = 4, CHANGE_PASSWORD = 5;
          boolean logout_on = false;
+         boolean exitCommand = false;
          Integer userMenuSelected = null;
          Account userAccount = null;
          Integer userAccNumber = null;
          String userPassword = "";
          int passwordTryCountDown = 3;
-        System.out.println("Welcome to the Online Banking System!");
-        while (true){
-            System.out.print("Please, ");
-            while (userAccNumber == null){
-                System.out.print("enter your account number: ");
-                userAccNumber = scanner.nextInt();
-                if(!banking.exists(userAccNumber)){
-                    userAccNumber = null;
-                    System.out.println("Unfortunately, we couldn't find your account details in our database.\n" +
-                            "Please, check your account number and try again.");
-                }
-            }
-            userAccount = banking.find(userAccNumber);
-            System.out.print("Please, ");
-            while (userPassword.length() < 4){
-                System.out.println("enter your password:");
-                if(scanner.hasNext()){
-                    userPassword = scanner.next();
-                    if(!userAccount.getPassword().equals(userPassword)){
-                        System.out.printf("Incorrect password. After 3 unsuccessful trials, " +
-                                "your account will be blocked automatically [%d tries left]", --passwordTryCountDown);
-                        userPassword = "";
+        while (true) {
+            System.out.println("Welcome to the Online Banking System!");
+            while (!exitCommand) {
+                System.out.print("Please, ");
+                while (userAccNumber == null) {
+                    System.out.print("enter your account number: ");
+                    userAccNumber = scanner.nextInt();
+                    if (!banking.exists(userAccNumber)) {
+                        userAccNumber = null;
+                        System.out.println("Unfortunately, we couldn't find your account details in our database.\n" +
+                                "Please, check your account number and try again.");
                     }
                 }
-            }
-
-            //---------------select menu
-            while (true){
-                banking.displayMenu();
-                while (userMenuSelected == null){
-                    userMenuSelected = scanner.nextInt();
-                    if(userMenuSelected < -1 || userMenuSelected > 5){
-                        System.out.println("Wrong menu select number!");
-                        banking.displayMenu();
-                        userMenuSelected = null;
+                userAccount = banking.find(userAccNumber);
+                if (!userAccount.getStatus()) {
+                    System.out.println("We are sorry but your account is in inactive status. Please, visit the nearest to you branch of the bank to activate your account.\n Thank you!");
+                    Thread.sleep(5000);     // wait for 5 seconds and return to the main "Welcome ..." while loop.
+                    continue;
+                }
+                System.out.print("Please, ");
+                while (userPassword.length() < 4) {
+                    System.out.println("enter your password:");
+                    if (scanner.hasNext()) {
+                        userPassword = scanner.next();
+                        if (!userAccount.getPassword().equals(userPassword)) {
+                            System.out.printf("Incorrect password. After 3 unsuccessful trials, " +
+                                    "your account will be blocked automatically [%d tries left]", --passwordTryCountDown);
+                            userPassword = "";
+                            if (passwordTryCountDown == 0) {
+                                userAccount.setStatus(false);
+                                System.out.println("You have reached the password entry limits and now your account has been blocked.");
+                            }
+                        }
                     }
                 }
-                switch (userMenuSelected){
-                    case QUIT:
-                        System.out.println("Thank you for using our service!");
-                        return;
-                    case LOGOUT:
-                        logout_on = true;
-                        System.out.println("Logging out... Thank you for using our service!");
-                        break;
-                    case VIEW:
-                        banking.view(userAccount);
-                        break;
-                    case DEPOSIT:
-                        handleDeposit(banking, userAccNumber, scanner);
-                        break;
-                    case WITHDRAW:
-                        handleWithdrawal(banking, userAccNumber, scanner);
-                        break;
-                    case TRANSFER:
-                        handleTransfer(banking, userAccNumber, scanner);
-                        break;
-                    case CHANGE_PASSWORD:
-                        handleChangePassword(banking, userAccNumber, scanner);
-                        break;
-                }
-                if(logout_on){
-                    break;
-                }
-                userMenuSelected = null;
 
+                //---------------select menu
+                while (true) {
+                    banking.displayMenu();
+                    while (userMenuSelected == null) {
+                        userMenuSelected = scanner.nextInt();
+                        if (userMenuSelected < -1 || userMenuSelected > 5) {
+                            System.out.println("Wrong menu select number!");
+                            banking.displayMenu();
+                            userMenuSelected = null;
+                        }
+                    }
+                    switch (userMenuSelected) {
+                        case QUIT:
+                            System.out.println("Thank you for using our service!");
+                            return;
+                        case LOGOUT:
+                            logout_on = true;
+                            System.out.println("Logging out... Thank you for using our service!");
+                            break;
+                        case VIEW:
+                            banking.view(userAccount);
+                            break;
+                        case DEPOSIT:
+                            handleDeposit(banking, userAccNumber, scanner);
+                            break;
+                        case WITHDRAW:
+                            handleWithdrawal(banking, userAccNumber, scanner);
+                            break;
+                        case TRANSFER:
+                            handleTransfer(banking, userAccNumber, scanner);
+                            break;
+                        case CHANGE_PASSWORD:
+                            handleChangePassword(banking, userAccNumber, scanner);
+                            break;
+                    }
+                    if (logout_on) {
+                        break;
+                    }
+                    userMenuSelected = null;
+
+                }
             }
-
-
         }
     }
 
@@ -116,12 +126,13 @@ public class OnlineBankingDemo {
 
     private static void handleTransfer(OnlineBanking banking, Integer userAccNumber, Scanner scanner) {
         int numberOfReceiver = -1;
-        System.out.printf("Please, ");
+        System.out.print("Please, ");
         while (numberOfReceiver == -1){
             System.out.print("enter the receiver's account number:");
             numberOfReceiver = scanner.nextInt();
             if(!banking.exists(numberOfReceiver)){
                 System.out.println("Wrong receiver account number!");
+                numberOfReceiver = -1;
             }
         }
         banking.transfer(userAccNumber, numberOfReceiver, scanner.nextInt());
