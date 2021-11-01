@@ -1,3 +1,10 @@
+/*
+Author: Jumanazar Saidov
+Date: 2021.11.01
+Committed to clean code!
+Definition:
+Testing functionalities of the Calculator methods.
+ */
 package OOP.Day4.Overloading;
 
 public class CalcDemo {
