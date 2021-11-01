@@ -29,7 +29,7 @@ public class Calculator {
             return Integer.parseInt(num1Str) + Integer.parseInt(num2Str) + "";
         }
         else {
-            return String.format("%.1f", (Double.parseDouble(num1Str) + Double.parseDouble(num2Str)));
+            return String.format("%.2f", (Double.parseDouble(num1Str) + Double.parseDouble(num2Str)));
         }
     }
     public static String add(int num1, String num2Str){
@@ -39,7 +39,7 @@ public class Calculator {
             return num1 + Integer.parseInt(num2Str) + "";
         }
         else {
-            return num1 + Double.parseDouble(num2Str) + "";
+            return String.format("%.2f", num1 + Double.parseDouble(num2Str));
         }
     }
 
@@ -50,9 +50,30 @@ public class Calculator {
             return num2 + Integer.parseInt(num1Str) + "";
         }
         else {
-            return num2 + Double.parseDouble(num1Str) + "";
+            return String.format("%.2f", num2 + Double.parseDouble(num1Str));
         }
     }
+
+    public static String add(Double num1, String num2Str){
+        if(isDigitNotValid(num2Str)) return null;
+        if(!num2Str.contains(".")){
+            return num1 + Integer.parseInt(num2Str) + "";
+        }
+        else {
+            return String.format("%.2f", num1 + Double.parseDouble(num2Str));
+        }
+    }
+
+    public static String add(String num1Str, Double num2){
+        if(isDigitNotValid(num1Str)) return null;
+        if(!num1Str.contains(".")){
+            return num2 + Integer.parseInt(num1Str) + "";
+        }
+        else {
+            return String.format("%.2f", num2 + Double.parseDouble(num1Str));
+        }
+    }
+
 
 
 
@@ -80,7 +101,7 @@ public class Calculator {
             return Integer.parseInt(num1Str) - Integer.parseInt(num2Str) + "";
         }
         else {
-            return String.format("%.1f", (Double.parseDouble(num1Str) - Double.parseDouble(num2Str)));
+            return String.format("%.2f", (Double.parseDouble(num1Str) - Double.parseDouble(num2Str)));
         }
     }
 
@@ -102,7 +123,7 @@ public class Calculator {
             return num2 - Integer.parseInt(num1Str) + "";
         }
         else {
-            return num2 - Double.parseDouble(num1Str) + "";
+            return String.format("%.2f", num2 - Double.parseDouble(num1Str));
         }
     }
 
@@ -132,7 +153,7 @@ public class Calculator {
             return Integer.parseInt(num1Str) * Integer.parseInt(num2Str) + "";
         }
         else {
-            return String.format("%.1f", (Double.parseDouble(num1Str) * Double.parseDouble(num2Str)));
+            return String.format("%.2f", (Double.parseDouble(num1Str) * Double.parseDouble(num2Str)));
         }
     }
 
@@ -154,7 +175,7 @@ public class Calculator {
             return num2 * Integer.parseInt(num1) + "";
         }
         else {
-            return num2 * Double.parseDouble(num1) + "";
+            return String.format("%.2f", num2 * Double.parseDouble(num1));
         }
     }
 
@@ -202,7 +223,7 @@ public class Calculator {
             return Integer.parseInt(dividendStr) / Integer.parseInt(divisorStr) + "";
         }
         else {
-            return String.format("%.1f", (Double.parseDouble(dividendStr) / Double.parseDouble(divisorStr)));
+            return String.format("%.2f", (Double.parseDouble(dividendStr) / Double.parseDouble(divisorStr)));
         }
     }
 
@@ -217,7 +238,7 @@ public class Calculator {
             return dividend / Integer.parseInt(divisorStr) + "";
         }
         else {
-            return dividend / Double.parseDouble(divisorStr) + "";
+            return String.format("%.2f", dividend / Double.parseDouble(divisorStr));
         }
     }
 
@@ -232,7 +253,7 @@ public class Calculator {
             return  (Integer.parseInt(dividendStr) / divisor) + "";
         }
         else {
-            return (Double.parseDouble(dividendStr)/ divisor) + "";
+            return String.format("%.2f", (Double.parseDouble(dividendStr)/ divisor));
         }
     }
 
@@ -278,7 +299,11 @@ public class Calculator {
     // supporting methods
     private static boolean isDigitNotValid(String numberString) {
         for (int index = 0; index < numberString.length(); index++) {
-            if (!Character.isDigit(numberString.charAt(index))) {
+
+            if (!Character.isDigit(numberString.charAt(index)) && numberString.charAt(index) != '.') {
+                if(index == 0 && numberString.charAt(0) == '-'){ // edge case for negative numbers
+                    continue;
+                }
                 System.out.println("Given String parameter is not a number: " + numberString);
                 return true;
             }
