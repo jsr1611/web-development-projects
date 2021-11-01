@@ -12,10 +12,6 @@ public class Triangle extends Figure{
 
     @Override
     public Double area() {
-        // for not-right trianle Area = 1/2 * HeightB * SideB;
-                            //or Area = SQRT(S * (S-sideA)*(S-sideB)*(S-sideC);
-                            // S = 1/2 * (sideA + sideB + sideC);
-        //for right triangle Area = 1/2 * sideA * sideB;
         return sideA * sideB / 2.0;
     }
 
@@ -24,3 +20,19 @@ public class Triangle extends Figure{
         return 1.0 * (sideA + sideB + hipotenuse);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// for not-right trianle Area = 1/2 * HeightB * SideB;
+//or Area = SQRT(S * (S-sideA)*(S-sideB)*(S-sideC);
+// S = 1/2 * (sideA + sideB + sideC);
+//for right triangle Area = 1/2 * sideA * sideB;
