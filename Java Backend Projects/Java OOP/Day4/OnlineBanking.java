@@ -17,8 +17,8 @@ public class OnlineBanking {
         System.out.println("Account owner: " + account.getOwner());
         System.out.println("Account number: " + account.getNumber());
         System.out.println("Bank name: " + account.getBankName());
-        System.out.println("Balance: " + account.getBalance());
-        System.out.println("Status: " + account.getStatus());
+        System.out.println("Balance: " + account.getBalance() + " UZS");
+        System.out.println("Status: " + (account.getStatus() ? "active" : "inactive(or blocked)"));
 /*
         System.out.printf("Account was not found in the database based on given information. \n" +
                 "Account number: %d\n" +
@@ -80,7 +80,7 @@ public class OnlineBanking {
             }
             else {
                 sender.setBalance(sender.getBalance() - amountToTransfer);
-                receiver.setBalance(sender.getBalance() + amountToTransfer);
+                receiver.setBalance(receiver.getBalance() + amountToTransfer);
                 System.out.printf("Transfer transaction of %d UZS into account %d was successful. " +
                         "Current balance: %.3f\n", amountToTransfer, numberOfReceiver, sender.getBalance());
                 sender.setLastOperation(String.format("Transfer transaction of %d UZS into account %d was successful.",
@@ -147,7 +147,7 @@ public class OnlineBanking {
     }
 
     public void displayMenu(){
-        System.out.println("Please, enter the number of the operation you want:\n------------MENU------------\n");
+        System.out.println("----------------MENU----------------\n");
         System.out.println("1 - View (hisob haqida ma`lumot)");
         System.out.println("2 - Deposit (hisobga pul qo`yish)");
         System.out.println("3 - Withdraw (hisobdan pul yechish)");
@@ -155,6 +155,7 @@ public class OnlineBanking {
         System.out.println("5 - Change Password (parol almashtirish)");
         System.out.println("0 - Logout (hisobdan chiqish)");
         System.out.println("-1 - Quit (dasturdan chiqish)");
+        System.out.print("Please, enter the number of the operation you want: ");
     }
 
 

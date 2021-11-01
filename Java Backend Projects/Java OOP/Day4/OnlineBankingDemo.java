@@ -17,14 +17,14 @@ public class OnlineBankingDemo {
         }*/
         Scanner scanner = new Scanner(System.in);
          final int QUIT = -1, LOGOUT = 0, VIEW = 1, DEPOSIT = 2, WITHDRAW = 3, TRANSFER = 4, CHANGE_PASSWORD = 5;
-         boolean logout_on = false;
-         boolean exitCommand = false;
-         Integer userMenuSelected = null;
-         Account userAccount = null;
-         Integer userAccNumber = null;
-         String userPassword = "";
-         int passwordTryCountDown = 3;
         while (true) {
+            boolean logout_on = false;
+            boolean exitCommand = false;
+            Integer userMenuSelected = null;
+            Account userAccount = null;
+            Integer userAccNumber = null;
+            String userPassword = "";
+            int passwordTryCountDown = 3;
             System.out.println("Welcome to the Online Banking System!");
             while (!exitCommand) {
                 System.out.print("Please, ");
@@ -45,7 +45,7 @@ public class OnlineBankingDemo {
                 }
                 System.out.print("Please, ");
                 while (userPassword.length() < 4) {
-                    System.out.println("enter your password:");
+                    System.out.print("enter your password:");
                     if (scanner.hasNext()) {
                         userPassword = scanner.next();
                         if (!userAccount.getPassword().equals(userPassword)) {
@@ -71,6 +71,7 @@ public class OnlineBankingDemo {
                             userMenuSelected = null;
                         }
                     }
+                    System.out.println("------------------------------------");
                     switch (userMenuSelected) {
                         case QUIT:
                             System.out.println("Thank you for using our service!");
@@ -78,27 +79,39 @@ public class OnlineBankingDemo {
                         case LOGOUT:
                             logout_on = true;
                             System.out.println("Logging out... Thank you for using our service!");
+                            System.out.println("------------------------------------");
                             break;
                         case VIEW:
+                            System.out.println("View menu was chosen.");
+                            System.out.println("------------------------------------");
                             banking.view(userAccount);
                             break;
                         case DEPOSIT:
+                            System.out.println("Deposit menu was chosen.");
+                            System.out.println("------------------------------------");
                             handleDeposit(banking, userAccNumber, scanner);
                             break;
                         case WITHDRAW:
+                            System.out.println("Withdraw menu was chosen.");
+                            System.out.println("------------------------------------");
                             handleWithdrawal(banking, userAccNumber, scanner);
                             break;
                         case TRANSFER:
+                            System.out.println("Transfer menu was chosen.");
+                            System.out.println("------------------------------------");
                             handleTransfer(banking, userAccNumber, scanner);
                             break;
                         case CHANGE_PASSWORD:
+                            System.out.println("Password Change menu was chosen.");
+                            System.out.println("------------------------------------");
                             handleChangePassword(banking, userAccNumber, scanner);
                             break;
                     }
+                    userMenuSelected = null;
                     if (logout_on) {
+                        exitCommand = true;
                         break;
                     }
-                    userMenuSelected = null;
 
                 }
             }
@@ -107,14 +120,14 @@ public class OnlineBankingDemo {
 
     private static void handleChangePassword(OnlineBanking banking, Integer userAccNumber, Scanner scanner) {
         String password = "";
-        System.out.println("Please, ");
+        System.out.print("Please, ");
         while (password.length() < 8 || password.length() > 16){
             System.out.println("enter your new password:");
             if(scanner.hasNext()){
                 password = scanner.next();
             }
             if(banking.find(userAccNumber).getPassword().equals(password)){
-                System.out.println("Same password");
+                System.out.println("Same password! Please, try again.");
             }
             else {
                 banking.find(userAccNumber).setPassword(password);
@@ -135,14 +148,17 @@ public class OnlineBankingDemo {
                 numberOfReceiver = -1;
             }
         }
+        System.out.print("Please, enter the amount you want to transfer: ");
         banking.transfer(userAccNumber, numberOfReceiver, scanner.nextInt());
     }
 
     private static void handleWithdrawal(OnlineBanking banking, Integer userAccNumber, Scanner scanner) {
+        System.out.print("Please, enter the amount you want to withdraw: ");
         banking.withdraw(userAccNumber, scanner.nextInt());
     }
 
     private static void handleDeposit(OnlineBanking banking, int accountNum, Scanner scanner) {
+        System.out.print("Please, enter the amount you want to deposit: ");
         banking.deposit(accountNum, scanner.nextInt());
     }
 }
