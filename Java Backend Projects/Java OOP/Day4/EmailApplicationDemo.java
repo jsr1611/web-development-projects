@@ -1,11 +1,16 @@
 package OOP.Day4;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class EmailApplicationDemo {
     private Scanner scanner = null;
     private EmailService emailService = null;
+    private final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+    private Date now = new Date();
     public static void main(String[] args) {
         EmailApplicationDemo email = new EmailApplicationDemo();
 
@@ -67,6 +72,12 @@ public class EmailApplicationDemo {
             userMenuSelected = null;
             // main loop of email application
             while (!exitCommand){
+                assert emailAccount != null;
+                int numOfUnread = emailAccount.getInboxUnread().size();
+                if(numOfUnread > 0){
+
+                    System.out.printf("You have %d unread email%s!\n", numOfUnread, numOfUnread == 1 ? "" : "s");
+                }
                 email.emailService.displayMenu();
                 while (userMenuSelected == null) {
                     userMenuSelected = email.scanner.nextInt();
@@ -101,7 +112,6 @@ public class EmailApplicationDemo {
                         return;
                 }
                 userMenuSelected = null;
-
             }
 
         }
@@ -145,12 +155,16 @@ public class EmailApplicationDemo {
             if (username.isEmpty()) {
                 username = scanner.next();
             }
+            if(!username.matches("^(.+)@(\\S+)$")){
+                System.out.println("Please, check the correctness of your email address and try again.");
+                continue;
+            }
             System.out.print("Please, enter your password:");
             password = scanner.next();
             Email emailAccount = emailService.find(username);
             if (emailAccount == null) {
                 System.out.println("ERROR 404");
-                System.out.println("The email address you entered didn't match with the one in our database. Please, check your email address and try again.");
+                //System.out.println("The email address you entered didn't match with the one in our database. Please, check your email address and try again.");
                 wrongEmailCount++;
                 if(wrongEmailCount >=3){
                     System.out.println("Forgot your username?");
@@ -209,18 +223,20 @@ public class EmailApplicationDemo {
         boolean returnCommand = false;
 
         while (selectMenu == null && !returnCommand){
+            int numMsg = emailAccount.getInbox().size();
+            System.out.printf("You have %d message%s at your inbox!\n", numMsg, numMsg > 1 ? "s" : "");
             System.out.println("----------------MENU----------------");
             System.out.println("1. READ\n2. DELETE\n0. RETURN\n-1.EXIT");
 
             System.out.print("Please, choose what you want to do:");
             selectMenu = scanner.nextInt();
-            if(selectMenu<-1 || selectMenu > 2){
+            if(selectMenu < -1 || selectMenu > 2){
                 selectMenu = null;
                 System.out.println("Wrong menu selected.");
                 continue;
             }
 
-            System.out.printf("You have %d messages at your inbox!\n", emailAccount.getInbox().size());
+
             switch (selectMenu){
                 case READ:
                     while (secondOption == null){
@@ -230,7 +246,7 @@ public class EmailApplicationDemo {
                             break;
                         }
                         for(Message message : emailAccount.getInbox()){
-                            System.out.println("Index: " + indexOfMsg++ + ", subject: " + message.getSubject() + ", from: " + message.getSender().getEmailAddress());
+                            System.out.println("Index: " + indexOfMsg++ + ", subject: " + message.getSubject() + ", from: " + message.getSender().getEmailAddress() + ", status: " + (message.isReadStatus() ? "read" : "unread"));
                         }
 
                         System.out.print("Please, choose the index of message:");
@@ -240,24 +256,52 @@ public class EmailApplicationDemo {
                             continue;
                         }
                         Message message = emailAccount.getInbox().get(secondOption);
+
+                        System.out.println("-------EMAIL CONTENT------\n");
                         System.out.println(message.toString());
                         emailAccount.getInbox().get(secondOption).setReadStatus(true);
-                        Contact[] receivers = emailAccount.getInbox().get(secondOption).getReceivers();
-                        for(Contact contact : receivers) {
-                            Email senderEmail = emailService.find(contact.getEmailAddress());
-                            Stack<Message> receiverMsgs = senderEmail.getInbox();
-                            for(Message rcvMsg : receiverMsgs){
-                                if(rcvMsg.equals(message)){
-                                    rcvMsg.setReadStatus(true);
-                                    System.out.println("Read receipt notifition was sent to the sender.");
-                                    break;
-                                }
+                        Contact sender = message.getSender();
+                        Stack<Message> receivedMsgs = emailService.find(sender.getEmailAddress()).getInbox();
+                        for(Message rcvMsg : receivedMsgs){
+                            if(rcvMsg.equals(message)){
+                                rcvMsg.setReadStatus(true);
+                                System.out.println("Read receipt notifition was sent to the sender.");
+                                break;
                             }
                         }
-                            /*while(true){
-                            - reply
-                            - return back options
-                        }*/
+
+                        Integer replyBack = null;
+                        Contact[] receiverers;
+                        while (replyBack == null){
+                            System.out.println("----------------MENU----------------\n");
+                            System.out.println("1. Reply\n2. Reply to all.\n0. Return to Inbox");
+                            System.out.print("Select a menu option: ");
+                            replyBack = scanner.nextInt();
+                            if(replyBack == 0){
+                                break;
+                            }
+                            else if(replyBack == 1){
+                                receiverers = new Contact[]{sender};
+                                handleWriteEmail(emailAccount, receiverers);
+                                break;
+                            }
+                            else if(replyBack == 2){
+                                receiverers = new Contact[message.getReceivers().length];
+                                receiverers[0] = sender;
+                                if(receiverers.length > 1) {
+                                    for (int i = 1; i < receiverers.length; i++) {
+                                        if (!message.getReceivers()[i].equals(emailAccount.getContact())) {
+                                            receiverers[i] = message.getReceivers()[i];
+                                        }
+                                    }
+                                }
+                                handleWriteEmail(emailAccount, receiverers);
+                                break;
+                            }
+                            else {
+                                replyBack = null;
+                            }
+                        }
 
                     }
                     if(selectMenu == 0){
@@ -299,7 +343,58 @@ public class EmailApplicationDemo {
                     return;
 
             }
+            if(returnCommand){
+                break;
+            }
+        }
+    }
 
+    private void handleWriteEmail(Email emailAccount, Contact[] receiverers) {
+        scanner = new Scanner(System.in);
+        while (true) {
+            if(receiverers.length == 1){
+                System.out.println("To: " + receiverers[0].getEmailAddress());
+            }
+            else {
+                System.out.print("To: ");
+                int counter = 0;
+                for(Contact contact : receiverers){
+                    System.out.print(contact.getEmailAddress());
+                    counter++;
+                    if(counter < receiverers.length){
+                        System.out.print(", ");
+                    }
+                }
+            }
+
+            System.out.println("Your message: ");
+            String msgContent = scanner.nextLine();
+            if (msgContent.length() < 3)
+                msgContent = scanner.nextLine();
+            if (msgContent.isEmpty()) {
+                System.out.println("Message content cannot be empty!");
+                continue;
+            }
+            String msgSubject = "";
+            while (true) {
+                System.out.println("Subject:");
+                msgSubject = scanner.nextLine();
+                if (msgSubject.isEmpty()) {
+                    System.out.println("Message title cannot be empty.");
+                    continue;
+                }
+                now = new Date();
+                boolean success = emailService.sendEmail(new Message(msgSubject,
+                        msgContent,
+                        emailAccount.getContact(),
+                        receiverers,
+                        format.format(now)));
+                if (!success) {
+                    continue;
+                }
+                break;
+            }
+            break;
         }
     }
 
@@ -331,7 +426,11 @@ public class EmailApplicationDemo {
                         System.out.println("Please, check the correctness of the email address!");
                         continue;
                     }
-                    Contact receiverCon = emailService.find(receiverEmail).getContact();
+                    Email receiverAccount = emailService.find(receiverEmail);
+                    Contact receiverCon = null;
+                    if(receiverAccount != null){
+                        receiverCon = receiverAccount.getContact();
+                    }
                     if (receiverCon != null) {
                         boolean success = emailService.sendEmail(new Message(msgSubject,
                                 msgContent,

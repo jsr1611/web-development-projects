@@ -14,6 +14,7 @@ public class EmailService {
                 return emailAccount;
             }
         }
+        System.out.println("We couldn't find the email address in our database. \nPlease, check the correctness of the email address provided.");
         return null;
     }
     public boolean sendEmail(Message messageToSend){
