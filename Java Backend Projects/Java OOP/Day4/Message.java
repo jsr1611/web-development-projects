@@ -88,13 +88,12 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message:\n" +
-                "subject:" + subject + "\n" +
-                ", message:" + message + "\n" +
-                ", sender:" + sender.getEmailAddress() + "\n" +
-                ", receivers:" + Arrays.toString(getReceiverEmails()) + "\n" +
-                ", receiptStatus:" + (receiptStatus ? "yes" : "not") + "\n" +
-                ", readStatus:" + (readStatus ? "read" : "unread") +
-                ", dateTime:" + dateTime;
+        return "Subject: " + subject + ",\n" +
+                "Message: " + message + ",\n" +
+                "Sender: " + sender.getEmailAddress() + ",\n" +
+                "Receivers: " + Arrays.toString(getReceiverEmails()) + ",\n" +
+                "ReceiptStatus: " + (receiptStatus ? "yes" : "not") + ",\n" +
+                "ReadStatus: " + (readStatus ? "read" : "unread") + ",\n" +
+                "Date: " + dateTime;
     }
 }
