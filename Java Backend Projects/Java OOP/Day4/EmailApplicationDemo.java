@@ -1,7 +1,6 @@
 package OOP.Day4;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Stack;
