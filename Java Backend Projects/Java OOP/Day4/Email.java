@@ -16,6 +16,12 @@ public class Email {
     private Stack<Message> outbox;
     private Stack<Message> inbox;
     private Stack<Message> spam;
+    public Email(Contact contact){
+        this.contact = contact;
+        this.outbox = new Stack<>();
+        this.inbox = new Stack<>();
+        this.spam = new Stack<>();
+    }
 
     public Email(Contact contact, Stack<Message> outbox, Stack<Message> inbox, Stack<Message> spam) {
         this.contact = contact;

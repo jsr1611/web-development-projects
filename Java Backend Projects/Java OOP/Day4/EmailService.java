@@ -1,10 +1,11 @@
 package OOP.Day4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EmailService {
-    Email[] emailAccounts;
-    public EmailService(Email[] emailAccounts){
+    ArrayList<Email> emailAccounts;
+    public EmailService(ArrayList<Email> emailAccounts){
         this.emailAccounts = emailAccounts;
     }
 
@@ -16,6 +17,14 @@ public class EmailService {
         }
         System.out.println("We couldn't find the email address in our database. \nPlease, check the correctness of the email address provided.");
         return null;
+    }
+    public boolean exists(String emailAddress){
+        for(Email emailAccount : emailAccounts){
+            if(emailAccount.getContact().getEmailAddress().equals(emailAddress)){
+                return true;
+            }
+        }
+        return false;
     }
     public boolean sendEmail(Message messageToSend){
         if(messageToSend != null){
@@ -105,7 +114,7 @@ public class EmailService {
             if(account.getContact().getFirstName().equals(firstName) &&
                     account.getContact().getLastName().equals(lastName) &&
                     account.getContact().getCountry().equals(countryName) &&
-                    account.getContact().getPhoneNumber() == Integer.parseInt(phoneNumber)){
+                    account.getContact().getPhoneNumber().equals(phoneNumber)){
                 return account.getContact().getEmailAddress();
 
             }

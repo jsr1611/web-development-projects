@@ -1,15 +1,14 @@
 package OOP.Day4;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class EmailApplicationDemo {
     private Scanner scanner = null;
     private EmailService emailService = null;
     private final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
     private Date now = new Date();
+    private ArrayList<Email> emailAccounts = new ArrayList<>();
     public static void main(String[] args) {
         EmailApplicationDemo email = new EmailApplicationDemo();
 
@@ -18,14 +17,14 @@ public class EmailApplicationDemo {
         Contact contact2 = new Contact("Jamshiddin", "Babajonov", "jamshiddin@gmail.com", "jamshiddin123$$");
         Contact contact3 = new Contact("Nur", "Saidov", "nursaid@gmail.com", "nur123$$");
         Contact contact4 = new Contact("Solih", "Farhodov", "solihfarhod@gmail.com", "solih123$$");
-        Contact[] contacts = {contact0, contact1, contact2, contact3, contact4};
-        Email emailAccount0 = new Email(contact0, new Stack<>(), new Stack<>(), new Stack<>());
-        Email emailAccount1 = new Email(contact1,  new Stack<>(), new Stack<>(), new Stack<>());
-        Email emailAccount2 = new Email(contact2,  new Stack<>(), new Stack<>(), new Stack<>());
-        Email emailAccount3 = new Email(contact3,  new Stack<>(), new Stack<>(), new Stack<>());
-        Email emailAccount4 = new Email(contact4,  new Stack<>(), new Stack<>(), new Stack<>());
-        Email[] emails = {emailAccount0, emailAccount1, emailAccount2, emailAccount3, emailAccount4};
-        email.emailService = new EmailService(emails);
+
+        email.emailAccounts.add(new Email(contact0));
+        email.emailAccounts.add(new Email(contact1));
+        email.emailAccounts.add(new Email(contact2));
+        email.emailAccounts.add(new Email(contact3));
+        email.emailAccounts.add(new Email(contact4));
+
+        email.emailService = new EmailService(email.emailAccounts);
         email.scanner = new Scanner(System.in);
         final int QUIT = -1, LOGOUT = 0, WRITE_EMAIL = 1, CHECK_INBOX = 2,CHECK_OUTBOX = 3, CHECK_BIN = 4, CHECK_SPAM = 5;
         while(true){
@@ -54,11 +53,11 @@ public class EmailApplicationDemo {
                             emailAccount = email.signin();
                             break;
                         case 2:
-                            createAccount();
+                            email.createAccount();
                             emailAccount = email.signin();
                             break;
                         case 3:
-                            resetPassword();
+                            email.resetPassword();
                             emailAccount = email.signin();
                             break;
                         case 0:
@@ -134,57 +133,161 @@ public class EmailApplicationDemo {
         System.out.println("Method yet to be implemented");
     }
 
-    private static void createAccount() {
-        System.out.println("Method yet to be implemented");
+    private void createAccount() {
+        //System.out.println("Method yet to be implemented");
+        System.out.println();
+        System.out.println("Create a new email account");
+        System.out.println();
+        scanner = new Scanner(System.in);
+        System.out.print("Enter your preferred email address: ");
+        String emailAddress = scanner.nextLine();
+        while (emailService.exists(emailAddress)){
+            System.out.println("This email has already been registered. Please, use a different email address.");
+            System.out.print("Enter your preferred email address: ");
+            emailAddress = scanner.nextLine();
+        }
+        System.out.print("Enter your preferred password: ");
+        String password = scanner.nextLine();
+        System.out.print("Enter the secret key: ");
+        String secretKey = scanner.nextLine();
+        System.out.print("Enter a hint for your secret key: ");
+        String secretKeyHint = scanner.nextLine();
+        System.out.print("Enter your first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter your last name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter your country name: ");
+        String countryName = scanner.nextLine();
+        System.out.print("Enter your phone number: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.println();
+        Contact contact = new Contact(firstName, lastName, emailAddress, password);
+        contact.setCountry(countryName);
+        contact.setPhoneNumber(phoneNumber);
+        contact.setSecretKey(secretKey);
+        contact.setSecretKeyHint(secretKeyHint);
+        System.out.println(contact);
 
+        System.out.println("Your account has been successfully created!");
+        System.out.println();
+        emailAccounts.add(new Email(contact));
     }
 
-    private static void resetPassword() {
-
+    private void resetPassword() {
+        scanner = new Scanner(System.in);
         System.out.println("Method yet to be implemented.");
+        System.out.println("\t\tRESET YOUR PASSWORD\t\t");
+        System.out.println();
+        String emailAddress = getUserInputForEmailAddress();
+        Email user = emailService.find(emailAddress);
+        int counter;
+        System.out.print("Please, enter your secret key you used during the email registration: ");
+        String secretKey = scanner.nextLine();
+        String password = "";
+        counter = 0;
+        while (!user.getContact().getSecretKey().equals(secretKey)){
+            System.out.println("Hint: " + user.getContact().getSecretKeyHint());
+            System.out.print("Please, enter your secret key you used during the email registration: ");
+            secretKey = scanner.nextLine();
+            counter++;
+            if(counter>=5){
+                System.out.println("You have reached five attempts in typing your secret key unsuccessfully.");
+                System.out.println("It seems that you are attempting to hack someone else's email account.");
+                break;
+            }
+        }
+        if(user.getContact().getSecretKey().equals(secretKey)){
+            System.out.print("Enter your new password:");
+            password = scanner.nextLine();
+            System.out.print("Confirm your password:");
+            String confirmedPwd = scanner.nextLine();
+            while (!confirmedPwd.equals(password)){
+                System.out.print("Please, enter your password correctly once again: ");
+                confirmedPwd = scanner.nextLine();
+            }
+            user.getContact().setPassword(password);
+            System.out.println("Your password was reset successfully");
+        }
+    }
+
+    private String getUserInputForEmailAddress() {
+        System.out.print("Please, enter your email address: ");
+        String emailAddress = scanner.nextLine();
+        int counter = 0;
+        while(!emailService.exists(emailAddress)){
+            System.out.print("Please, enter your email address correctly: ");
+            emailAddress = scanner.nextLine();
+            counter++;
+            if(counter >= 5){
+                System.out.println();
+                System.out.println("You have reached " + counter + " unsuccessful attempts. Please, find your username using the below survey.");
+                System.out.println();
+                emailAddress = findUserName();
+            }
+        }
+        return emailAddress;
     }
 
     private Email signin() {
-        String username, password;
+        scanner = new Scanner(System.in);
+        String username = null, password = null;
         int wrongEmailCount = 0;
         int wrongPasswdCount = 0;
-        while (true) {
-            System.out.print("Please, enter your email address:");
-            username = scanner.next();
-            if (username.isEmpty()) {
+        Email emailAccount = null;
+
+        while (emailAccount == null) {
+            if(username == null){
+                System.out.print("Please, enter your email address:");
                 username = scanner.next();
+                if(!username.matches("^(.+)@(\\S+)$")){
+                    System.out.println("Please, check the correctness of your email address and try again.");
+                    continue;
+                }
             }
-            if(!username.matches("^(.+)@(\\S+)$")){
-                System.out.println("Please, check the correctness of your email address and try again.");
-                continue;
+            if(password == null){
+                System.out.print("Please, enter your password:");
+                password = scanner.next();
             }
-            System.out.print("Please, enter your password:");
-            password = scanner.next();
-            Email emailAccount = emailService.find(username);
+
+            emailAccount = emailService.find(username);
             if (emailAccount == null) {
                 System.out.println("ERROR 404");
-                //System.out.println("The email address you entered didn't match with the one in our database. Please, check your email address and try again.");
+                System.out.println("The email address you entered didn't match with the one in our database. Please, check your email address and try again.");
                 wrongEmailCount++;
-                if(wrongEmailCount >=3){
-                    System.out.println("Forgot your username?");
-                    //username = findUserName(scanner, emailSystem);
+                if(wrongEmailCount > 5){
+                    break;
                 }
-                continue;
+                else if(wrongEmailCount >=3){
+                    System.out.println("Forgot your username?");
+                    username = findUserName();
+                    emailAccount = emailService.find(username);
+                }
+                else
+                {
+                    username = null;
+                    continue;
+                }
             }
             if (!emailAccount.getContact().getPassword().equals(password)) {
                 System.out.println("Wrong password. Please, try again.");
                 wrongPasswdCount++;
-                if(wrongEmailCount >= 3){
+                if(wrongPasswdCount >= 5){
                     System.out.printf("You have reached %d wrong password attemps. Returning to main menu...", wrongPasswdCount);
-                    return null;
                 }
-                continue;
+                else if(wrongPasswdCount >= 3){
+                    System.out.println("Forgot your passowrd?");
+                    resetPassword();
+                    password = null;
+                    emailAccount = null;
+                }
+                else {
+                    password = null;
+                    emailAccount = null;
+                }
             }
-            System.out.println("Welcome, " + emailAccount.getContact().getFirstName() + "!");
-            return emailAccount;
         }
-
-
+        System.out.println("Welcome, " + emailAccount.getContact().getFirstName() + "!");
+        return emailAccount;
     }
 
     private String findUserName() {
@@ -204,13 +307,12 @@ public class EmailApplicationDemo {
             userName = emailService.find(firstName, lastName, countryName, phoneNumber);
             if(!userName.isEmpty()){
                 System.out.println("Your userName is '" + userName + "'");
+                return userName;
             }
             else {
-                System.out.println("There is no");
+                System.out.println("There is no username registered for the given information.");
             }
-
         }
-
         return null;
     }
 
