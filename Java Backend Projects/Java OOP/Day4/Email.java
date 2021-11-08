@@ -16,11 +16,13 @@ public class Email {
     private Stack<Message> outbox;
     private Stack<Message> inbox;
     private Stack<Message> spam;
+    private Stack<Message> bin;
     public Email(Contact contact){
         this.contact = contact;
         this.outbox = new Stack<>();
         this.inbox = new Stack<>();
         this.spam = new Stack<>();
+        this.bin = new Stack<>();
     }
 
     public Email(Contact contact, Stack<Message> outbox, Stack<Message> inbox, Stack<Message> spam) {
@@ -28,6 +30,7 @@ public class Email {
         this.outbox = outbox;
         this.inbox = inbox;
         this.spam = spam;
+        this.bin = new Stack<>();
     }
     public Message getMessage() {
         return message;
@@ -79,5 +82,21 @@ public class Email {
 
     public void setSpam(Stack<Message> spam) {
         this.spam = spam;
+    }
+
+    public void setOutbox(Stack<Message> outbox) {
+        this.outbox = outbox;
+    }
+
+    public void setInbox(Stack<Message> inbox) {
+        this.inbox = inbox;
+    }
+
+    public Stack<Message> getBin() {
+        return bin;
+    }
+
+    public void setBin(Stack<Message> bin) {
+        this.bin = bin;
     }
 }
