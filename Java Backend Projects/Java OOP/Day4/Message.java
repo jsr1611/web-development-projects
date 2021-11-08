@@ -1,3 +1,10 @@
+/*
+Author: Jumanazar Saidov
+Date: 2021.11.03
+Definition:
+Accommodate email message related properties such as subject, message itself, sender, receiver(s), readStatus, etc.
+
+ */
 package OOP.Day4;
 
 import java.util.Arrays;

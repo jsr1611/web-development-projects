@@ -1,3 +1,11 @@
+/*
+Author: Jumanazar Saidov
+Date: 2021.11.09
+Definition:
+Implementation class of the Email Application.
+
+ */
+
 package OOP.Day4;
 
 import java.text.SimpleDateFormat;

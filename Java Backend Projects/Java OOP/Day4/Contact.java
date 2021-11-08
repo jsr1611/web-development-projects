@@ -1,3 +1,10 @@
+/*
+Author: Jumanazar Saidov
+Date: 2021.11.03
+Definition:
+Accommodate user account properties such as name, emailAddress, password, country, phoneNumber, etc.
+
+ */
 package OOP.Day4;
 
 public class Contact {

@@ -1,7 +1,13 @@
+/*
+Author: Jumanazar Saidov
+Date: 2021.11.03
+Definition:
+Main email service related methods collection
+ */
+
 package OOP.Day4;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EmailService {
     ArrayList<Email> emailAccounts;
@@ -88,15 +94,6 @@ public class EmailService {
         }
         System.out.println("Message was successfully deleted.");
     }
-    /*
-    final int QUIT = -1,
-    LOGOUT = 0,
-    WRITE_EMAIL = 1,
-    CHECK_INBOX = 2,
-    CHECK_OUTBOX = 3,
-    CHECK_BIN = 4,
-    CHECK_SPAM = 5;
-     */
     public void displayMenu(){
         System.out.println("----------------MENU----------------\n");
         System.out.println("1 - Write new email (yangi xat yozish)");
