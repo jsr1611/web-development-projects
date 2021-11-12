@@ -25,8 +25,8 @@ This project can be extended in a variety of ways as you learn more Spring conce
 
 Keep track of your progress by marking it as done. You can also click on a task to see more information about it.
 
-- [ ] [Use Spring initializr to create the initial project](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/UseSpringInitializrToCreateInitialProject.md)
-- [ ] [Install an IDE](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/InstallAnIDE.md)
+- [x] [Use Spring initializr to create the initial project](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/UseSpringInitializrToCreateInitialProject.md)
+- [x] [Install an IDE](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/InstallAnIDE.md)
 - [ ] [Define the restaurant entity](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/DefineRestaurantEntity.md)
 - [ ] [Use Lombok to help implement entities](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/UseLombokToHelpImplementEntities.md)
 - [ ] [Define the dining review entity](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/DefineDiningReviewEntity.md)
@@ -34,11 +34,11 @@ Keep track of your progress by marking it as done. You can also click on a task 
 - [ ] [Add “status” to your dining review entity](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/AddStatusToYourDiningReviewEntity.md)
 - [ ] [Define a data model for an admin review action](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/DefineDataModelForAdminReviewAction.md)
 - [ ] [Define the data repositories](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/DefineDataRepositories.md)
-- [ ] [Optional: Setup your project structure](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/Optional_SetupYourProjectStructure.md)
+- [x] [Optional: Setup your project structure](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/Optional_SetupYourProjectStructure.md)
 - [ ] [Define the API endpoints](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/DefineAPIEndpoints.md)
 - [ ] [Configure the H2 database to persist locally](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/ConfigureH2DatabaseToPersistLocally.md)
 - [ ] [Configure Hibernate to always drop the database](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/ConfigureHibernateToAlwaysDropDatabase.md)
-- [ ] [Build/run your Spring app, and test your APIs](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/BuildRunYourSpringAppAndTestYourAPIs.md)
+- [x] [Build/run your Spring app, and test your APIs](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/BuildRunYourSpringAppAndTestYourAPIs.md)
 - [ ] [Next steps](https://github.com/jsr1611/web-development-projects/blob/main/Java%20Backend%20Projects/DiningReviewAPI/ProjectTasks/NextSteps.md)
 
 
