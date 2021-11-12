@@ -22,3 +22,6 @@ An app isn’t useful if it isn’t secure. Only known users with granted permis
 Get your apps off your computer and into the virtual world! Deployment refers to any process in which you make your app accessible to users. There are plenty of cloud services, such as Microsoft Azure, Amazon Web Services, and Google Cloud Platform, that specialize in deployment. To explore Azure, for example, start off with this [Azure deployment tutorial on spring.io](https://spring.io/guides/gs/spring-boot-for-azure/), then dig into the [Azure Spring Cloud website](https://azure.microsoft.com/en-us/services/spring-cloud/). For AWS, use the [Getting started with Spring Boot on AWS blog series](https://aws.amazon.com/blogs/opensource/getting-started-with-spring-boot-on-aws-part-1/). For Google, start with the [Build, containerize, and deploy Spring Boot apps on Google Cloud pathway](https://developers.google.com/learn/pathways/java-cloud-fundamentals).
 
 Once again, congratulations on finishing your Skill Path! We’re excited to see what you accomplish next.
+
+
+## [What is next?](https://www.codecademy.com/articles/whats-next-general)
