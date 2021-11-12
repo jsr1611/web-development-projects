@@ -1,4 +1,4 @@
-package com.example.DiningReviewAPI.Controller;
+package com.example.DiningReviewAPI.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
