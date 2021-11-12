@@ -21,6 +21,27 @@ This project can be extended in a variety of ways as you learn more Spring conce
 - Leverage the convenience of Lombok
 - Use cURL to test your API scenarios
 
+## Project Tasks
+
+Keep track of your progress by marking it as done. You can also click on a task to see more information about it.
+
+- [ ] [Use Spring initializr to create the initial project]()
+- [ ] [Install an IDE]()
+- [ ] [Define the restaurant entity]()
+- [ ] [Use Lombok to help implement entities]()
+- [ ] [Define the dining review entity]()
+- [ ] [Define the user entity]()
+- [ ] [Add “status” to your dining review entity]()
+- [ ] [Define a data model for an admin review action]()
+- [ ] [Define the data repositories]()
+- [ ] [Optional: Setup your project structure]()
+- [ ] [Define the API endpoints]()
+- [ ] [Configure the H2 database to persist locally]()
+- [ ] [Configure Hibernate to always drop the database]()
+- [ ] [Build/run your Spring app, and test your APIs]()
+- [ ] [Next steps]()
+
+
 ## Prerequisites:
 
 - Java
