@@ -27,17 +27,17 @@ Keep track of your progress by marking it as done. You can also click on a task 
 
 - [x] [Use Spring initializr to create the initial project](ProjectTasks/UseSpringInitializrToCreateInitialProject.md)
 - [x] [Install an IDE](ProjectTasks/InstallAnIDE.md)
-- [ ] [Define the restaurant entity](ProjectTasks/DefineRestaurantEntity.md)
-- [ ] [Use Lombok to help implement entities](ProjectTasks/UseLombokToHelpImplementEntities.md)
-- [ ] [Define the dining review entity](ProjectTasks/DefineDiningReviewEntity.md)
-- [ ] [Define the user entity](ProjectTasks/DefineUserEntity.md)
-- [ ] [Add “status” to your dining review entity](ProjectTasks/AddStatusToYourDiningReviewEntity.md)
-- [ ] [Define a data model for an admin review action](ProjectTasks/DefineDataModelForAdminReviewAction.md)
-- [ ] [Define the data repositories](ProjectTasks/DefineDataRepositories.md)
+- [x] [Define the restaurant entity](ProjectTasks/DefineRestaurantEntity.md)
+- [x] [Use Lombok to help implement entities](ProjectTasks/UseLombokToHelpImplementEntities.md)
+- [x] [Define the dining review entity](ProjectTasks/DefineDiningReviewEntity.md)
+- [x] [Define the user entity](ProjectTasks/DefineUserEntity.md)
+- [x] [Add “status” to your dining review entity](ProjectTasks/AddStatusToYourDiningReviewEntity.md)
+- [x] [Define a data model for an admin review action](ProjectTasks/DefineDataModelForAdminReviewAction.md)
+- [x] [Define the data repositories](ProjectTasks/DefineDataRepositories.md)
 - [x] [Optional: Setup your project structure](ProjectTasks/Optional_SetupYourProjectStructure.md)
 - [ ] [Define the API endpoints](ProjectTasks/DefineAPIEndpoints.md)
-- [ ] [Configure the H2 database to persist locally](ProjectTasks/ConfigureH2DatabaseToPersistLocally.md)
-- [ ] [Configure Hibernate to always drop the database](ProjectTasks/ConfigureHibernateToAlwaysDropDatabase.md)
+- [x] [Configure the H2 database to persist locally](ProjectTasks/ConfigureH2DatabaseToPersistLocally.md)
+- [x] [Configure Hibernate to always drop the database](ProjectTasks/ConfigureHibernateToAlwaysDropDatabase.md)
 - [x] [Build/run your Spring app, and test your APIs](ProjectTasks/BuildRunYourSpringAppAndTestYourAPIs.md)
 - [ ] [Next steps](ProjectTasks/NextSteps.md)
 
@@ -87,3 +87,4 @@ The important part is that this project demonstrates your skills.
 
 ## Next 
 What to do next? Check out [here](https://www.codecademy.com/articles/giving-and-receiving-project-feedback)
+Also [here for more](https://www.codecademy.com/paths/create-rest-apis-with-spring-and-java/tracks/spring-apis-next-steps/modules/next-steps/informationals/spring-apis-next-steps)
