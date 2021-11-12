@@ -32,4 +32,14 @@ class diningReview {
     @Column(name = "commentary")
     private String commentary;
 
+    @Column(name = "status")
+    private String status;
+
+    private enum statuses{
+        SUBMITTED,
+        IN_REVIEW,
+        ACCEPTED,
+        REJECTED
+    }
+
 }
