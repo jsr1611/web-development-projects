@@ -83,3 +83,7 @@ Check out these helpful resources:
 What to see how someone else completed this project? Click this [link](https://static-assets.codecademy.com/skillpaths/spring/diningreviews.v02.zip) to download a zip file 
 containing one possible solution. Remember: your project doesn’t have to look exactly like this! 
 The important part is that this project demonstrates your skills.
+
+
+## Next 
+What to do next? Check out [here](https://www.codecademy.com/articles/giving-and-receiving-project-feedback)

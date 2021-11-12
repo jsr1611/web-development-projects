@@ -6,10 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "RESTAURANT")
-public @Data class restaurant {
+public @Data class Restaurant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -39,12 +39,12 @@ public @Data class restaurant {
     @Column(name = "avg_score")
     private Double avgScore;
 
-    public restaurant(){}
-    public restaurant(String name, String city, Integer capacity, Integer availableSeats, Integer numMenus) {
+    public Restaurant(){}
+    public Restaurant(String name, String city, Integer capacity, Integer numMenus) {
         this.name = name;
         this.city = city;
         this.capacity = capacity;
-        this.availableSeats = availableSeats;
+        this.availableSeats = capacity;
         this.numMenus = numMenus;
     }
 

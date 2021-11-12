@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DINING_REVIEW")
 public @Data
-class diningReview {
+class DiningReview {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "reviewer_name")
@@ -40,6 +40,22 @@ class diningReview {
         IN_REVIEW,
         ACCEPTED,
         REJECTED
+    }
+
+    public void setStatusFromEnum(Integer index){
+        switch (index){
+            case 0:
+                this.status = statuses.SUBMITTED.toString();
+                break;
+            case 1:
+                this.status = statuses.IN_REVIEW.toString();
+                break;
+            case 2:
+                this.status = statuses.ACCEPTED.toString();
+                break;
+            case 3:
+                this.status = statuses.REJECTED.toString();
+        }
     }
 
 }

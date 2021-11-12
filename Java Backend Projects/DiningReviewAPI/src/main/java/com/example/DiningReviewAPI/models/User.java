@@ -7,10 +7,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public @Data class user {
+public @Data class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "display_name", unique = true)
