@@ -28,7 +28,7 @@ public class Controller {
     }
 
     @GetMapping("/{restaurantId}")
-    public Restaurant search(@PathVariable Long restaurantId){
+    public Restaurant getRestaurant(@PathVariable Long restaurantId){
         Restaurant restaurant;
         Optional<Restaurant> restaurantOptional = restaurantRepo.findById(restaurantId);
         if(restaurantOptional.isPresent()){
@@ -51,7 +51,8 @@ public class Controller {
             Integer capacity = 50;
             Integer numMenus = 10;
 
-            restaurant = new Restaurant(name, city, capacity, numMenus);
+
+            restaurant = new Restaurant(0001L, name, city, capacity,capacity, numMenus,  0.0, 0.0, 0.0, 0.0);
             System.out.println(restaurant.getId());
             if(restaurant.getId() == null){
                 return "Restaurant ID was null!";

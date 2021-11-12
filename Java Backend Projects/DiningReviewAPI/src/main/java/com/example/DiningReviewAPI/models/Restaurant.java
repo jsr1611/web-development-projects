@@ -39,13 +39,20 @@ public @Data class Restaurant {
     @Column(name = "avg_score")
     private Double avgScore;
 
-    public Restaurant(){}
-    public Restaurant(String name, String city, Integer capacity, Integer numMenus) {
+    public Restaurant(Long id, String name, String city, Integer capacity, Integer availableSeats, Integer numMenus, Double peanutScore, Double eggScore, Double dairyScore, Double avgScore) {
+        this.id = id;
         this.name = name;
         this.city = city;
         this.capacity = capacity;
-        this.availableSeats = capacity;
+        this.availableSeats = availableSeats;
         this.numMenus = numMenus;
+        this.peanutScore = peanutScore;
+        this.eggScore = eggScore;
+        this.dairyScore = dairyScore;
+        this.avgScore = avgScore;
     }
 
+    public Restaurant() {
+
+    }
 }
