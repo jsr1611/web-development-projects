@@ -22,10 +22,10 @@ public class Controller {
     }
 
 
-    @GetMapping("/")
-    public String index(){
-        return "Welcome to Dining Review API Project home page!";
-    }
+//    @GetMapping("/")
+//    public String index(){
+//        return "Welcome to Dining Review API Project home page!";
+//    }
 
     @GetMapping("/{restaurantId}")
     public Restaurant getRestaurant(@PathVariable Long restaurantId){
