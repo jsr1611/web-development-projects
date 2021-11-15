@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get All Restaurants</title>
+</head>
+<body>
+<h3>Get all restaurants</h3>
+
+<form action="getAllRestaurants.html">
+    <label for="getAll" > Get restaurants </label> <input type="button" id="getAll">
+</form>
+<br>
+<h3>Restaurants:</h3>
+<br>
+<div id="restaurants"></div>
+<script>
+    fetch('restaurants.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+    function appendData(data) {
+        var mainContainer = document.getElementById("restaurants");
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = 'Restaurant name: ' + data[i].name
+                        + ', Address: ' + data[i].line1
+                        + ', City: ' + data[i].city
+                        + ', State: ' + data[i].state
+                        + ', Zipcode: ' + data[i].zipcode
+                        + ', Website: ' + data[i].website
+                        + ', Overall score: ' + data[i].overall_score;
+            mainContainer.appendChild(div);
+        }
+    }
+</script>
+
+<h3>Json Response:</h3>
+<br>
+<label>
+    <textarea name="jsonResponse" ></textarea>
+</label>
+
+</body>
+</html>
