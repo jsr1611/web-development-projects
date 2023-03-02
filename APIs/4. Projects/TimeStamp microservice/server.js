@@ -24,27 +24,26 @@ app.get("/api/hello", function (req, res) {
 });
 
 var date = new Date();
-var unixTime = date.getTime() / 1000;
+var unixTime = date.getTime();
 
 app.get("/api", function (req, res) {
     date = new Date();
-    unixTime = date.getTime() / 1000;
+    unixTime = date.getTime();
     req.time = date.toUTCString();
-    console.log(unixTime + " " + req.time);
     res.json({ unix: unixTime, utc: req.time });
 });
 
 app.get("/api/:date?", function (req, res) {
-    console.log("req date: " + req.params.date);
     var dateParam = req.params.date;
 
-    if (dateParam.includes("-")) {
-        date = new Date(dateParam);
+    // check if the number has less than 5 [consecutive] numbers, which means dates, opposite would be unix time
+    if (!/\d{5,}/.test(dateParam)) {
+        date = new Date(req.params.date);
         var testDate = date.toString();
         if (testDate == "Invalid Date") {
             res.json({ error: testDate });
         } else {
-            unixTime = date.getTime() / 1000;
+            unixTime = date.getTime();
             req.time = date.toUTCString();
             res.json({ unix: Number(unixTime), utc: req.time });
         }
@@ -54,7 +53,6 @@ app.get("/api/:date?", function (req, res) {
         if (testDate == "Invalid Date") {
             res.json({ error: testDate });
         } else {
-            console.log("unix Num: " + dateParam);
             unixTime = Number(dateParam);
             req.time = new Date(Number(dateParam)).toUTCString();
             res.json({ unix: Number(unixTime), utc: req.time });
