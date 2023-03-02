@@ -49,23 +49,17 @@ app.get("/api/:date?", function (req, res) {
             res.json({ unix: Number(unixTime), utc: req.time });
         }
     } else {
-        date = new Date(Number(dateParam) / 1000);
+        date = new Date(Number(dateParam));
         testDate = date.toString();
         if (testDate == "Invalid Date") {
             res.json({ error: testDate });
         } else {
             console.log("unix Num: " + dateParam);
             unixTime = Number(dateParam);
-            req.time = new Date(Number(dateParam) / 1000).toUTCString();
+            req.time = new Date(Number(dateParam)).toUTCString();
             res.json({ unix: Number(unixTime), utc: req.time });
         }
     }
-
-    //     console.log(unixTime + " " + req.time);
-    //     unixTime = new Date().getTime() / 1000;
-    //     req.time = new Date().toUTCString();
-    //     res.json({ unix: unixTime, utc: req.time });
-    // }
 });
 
 var port = process.env.PORT || 3000;
