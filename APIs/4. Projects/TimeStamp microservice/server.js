@@ -23,22 +23,49 @@ app.get("/api/hello", function (req, res) {
     res.json({ greeting: "hello API" });
 });
 
+var date = new Date();
+var unixTime = date.getTime() / 1000;
+
+app.get("/api", function (req, res) {
+    date = new Date();
+    unixTime = date.getTime() / 1000;
+    req.time = date.toUTCString();
+    console.log(unixTime + " " + req.time);
+    res.json({ unix: unixTime, utc: req.time });
+});
+
 app.get("/api/:date?", function (req, res) {
-    const date = req.params.date;
-    let unixD = "";
-    let utcD = "";
-    if (date.includes("-")) {
-        unixD = Math.floor(new Date(date).getTime() / 1000);
-        utcD = new Date(date).toUTCString();
+    console.log("req date: " + req.params.date);
+    var dateParam = req.params.date;
+
+    if (dateParam.includes("-")) {
+        date = new Date(dateParam);
+        var testDate = date.toString();
+        if (testDate == "Invalid Date") {
+            res.json({ error: testDate });
+        } else {
+            unixTime = date.getTime() / 1000;
+            req.time = date.toUTCString();
+            res.json({ unix: Number(unixTime), utc: req.time });
+        }
     } else {
-        unixD = date;
-        utcD = new Date(Number(date) * 1000).toUTCString();
+        date = new Date(Number(dateParam) / 1000);
+        testDate = date.toString();
+        if (testDate == "Invalid Date") {
+            res.json({ error: testDate });
+        } else {
+            console.log("unix Num: " + dateParam);
+            unixTime = Number(dateParam);
+            req.time = new Date(Number(dateParam) / 1000).toUTCString();
+            res.json({ unix: Number(unixTime), utc: req.time });
+        }
     }
 
-    res.json({
-        unix: unixD,
-        utc: utcD,
-    });
+    //     console.log(unixTime + " " + req.time);
+    //     unixTime = new Date().getTime() / 1000;
+    //     req.time = new Date().toUTCString();
+    //     res.json({ unix: unixTime, utc: req.time });
+    // }
 });
 
 var port = process.env.PORT || 3000;
