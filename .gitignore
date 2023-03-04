@@ -6,3 +6,7 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+/node_modules/
+/.idea/
+**/node_modules/
