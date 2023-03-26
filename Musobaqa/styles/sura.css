@@ -1,0 +1,12 @@
+.participant {
+    display: flex;
+    flex-direction: column;
+    line-height: 10px;
+    margin-bottom: 2rem;
+}
+.participant-info {
+    float: left;
+}
+.participant-image {
+    text-align: right;
+}

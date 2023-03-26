@@ -1,0 +1,25 @@
+body {
+    background-color: bisque;
+    /* width: 98vw;
+    height: 98vh; */
+    margin: 0 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    border: 1 solid blue;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.musobaqa {
+    text-transform: uppercase;
+}
